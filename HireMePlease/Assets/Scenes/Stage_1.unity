@@ -5472,7 +5472,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1301696976205278281, guid: 70517fb6c20cf0e46b4dd13539eccd3a, type: 3}
-  smoothTime: 0.3
+  smoothTime: 1.38
 --- !u!43 &1139427154
 Mesh:
   m_ObjectHideFlags: 0
