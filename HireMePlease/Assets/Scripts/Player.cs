@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
 using System.Linq;
+using Photon.Pun;
 
 
 public class Player : MonoBehaviour
@@ -25,6 +25,8 @@ public class Player : MonoBehaviour
     private Vector3 lastHeading;
     public float dashDist = 1.0f;
 
+    public PhotonView photonView;
+
     private KeyCode[] keycodes = new KeyCode[] 
     {
         KeyCode.W, KeyCode.A,
@@ -44,6 +46,7 @@ public class Player : MonoBehaviour
         //Gives space to not "flip" the player
         forward = Vector3.Normalize(forward);
         right = Quaternion.Euler(new Vector3(0,90,0)) * forward;
+        photonView = GetComponent<PhotonView>();
     }
 
     // Update is called once per frame
@@ -65,12 +68,15 @@ public class Player : MonoBehaviour
         
         //Input Movements
         //add keys by adding them to the keycodes list
-        if(keycodes.Any(code => Input.GetKey(code))) {
+        if(photonView.IsMine){
+            if(keycodes.Any(code => Input.GetKey(code))) {
             Move();
             //Debug.Log(keycodes.Any(code => Input.GetKey(code)));
-        }
+             }
         //dash handler
-        Dash();
+            Dash();
+        }
+        
     }
 
     private void Move(){
