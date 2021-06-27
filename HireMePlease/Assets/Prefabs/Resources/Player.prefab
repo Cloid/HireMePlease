@@ -129,8 +129,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  ProgressBar_GO: {fileID: 0}
-  progressBar: {fileID: 0}
   barValue: 0
   dashDist: 1
 --- !u!65 &1301696976205278284
