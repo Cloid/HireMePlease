@@ -55,11 +55,21 @@ public class LobbyNetworkManager : MonoBehaviourPunCallbacks
         UpdatePlayerList();
     }
 
+  
+
     public override void OnLeftRoom(){
         _statusField.text = "Lobby";
         Debug.Log("LeftRoom");
         _leaveRoomButton.interactable = false;
         _startGameButton.interactable = false;
+        UpdatePlayerList();
+    }
+
+    public override void OnPlayerEnteredRoom(Photon.Realtime.Player player) {
+        UpdatePlayerList();
+    }
+
+    public override void OnPlayerLeftRoom(Photon.Realtime.Player player) {
         UpdatePlayerList();
     }
 
