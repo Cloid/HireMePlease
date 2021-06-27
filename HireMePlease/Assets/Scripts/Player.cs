@@ -18,8 +18,8 @@ public class Player : MonoBehaviour
     //Bools for task
     private bool _inTask;
     private bool oneTime;
-    public GameObject ProgressBar_GO;
-    public ProgressBar progressBar;
+    //public GameObject ProgressBar_GO;
+    //public ProgressBar progressBar;
     public float barValue;
     private Vector3 lastDir;
     private Vector3 lastHeading;
@@ -49,19 +49,19 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Get current value of Slider
-        barValue = ProgressBar_GO.GetComponent<Slider>().value;
+        // //Get current value of Slider
+        // barValue = ProgressBar_GO.GetComponent<Slider>().value;
 
-        //If inside a Task Trigger Area and Holding Space, proceed
-        if(_inTask && Input.GetKey(KeyCode.Space)){
+        // //If inside a Task Trigger Area and Holding Space, proceed
+        // if(_inTask && Input.GetKey(KeyCode.Space)){
             
-            //If Task is done, don't update otherwise update progress
-            if(barValue >= 1){
-                ProgressBar_GO.SetActive(false);
-            } else {
-                updateProgess();
-            }
-        }
+        //     //If Task is done, don't update otherwise update progress
+        //     if(barValue >= 1){
+        //         ProgressBar_GO.SetActive(false);
+        //     } else {
+        //         updateProgess();
+        //     }
+        // }
         
         //Input Movements
         //add keys by adding them to the keycodes list
@@ -87,30 +87,30 @@ public class Player : MonoBehaviour
         lastHeading = heading;
     }
 
-    private void OnTriggerEnter(Collider other) {
-        //If inside Task Trigger area, make bool true
-        if(other.CompareTag("Task")){
-            _inTask = true;
-        }
-    }
+    // private void OnTriggerEnter(Collider other) {
+    //     //If inside Task Trigger area, make bool true
+    //     if(other.CompareTag("Task")){
+    //         _inTask = true;
+    //     }
+    // }
 
-    private void OnTriggerExit(Collider other) {
-        //If exiting Task Trigger area, make bool false and set to 0
-        //If the Progress Bar value is less than 1, don't show after exiting
-        if(other.CompareTag("Task")){
-            _inTask = false;
-            ProgressBar_GO.GetComponent<Slider>().value = 0;
-            if(barValue < 1){
-                ProgressBar_GO.SetActive(false);
-            }
-        }
-    }
+    // private void OnTriggerExit(Collider other) {
+    //     //If exiting Task Trigger area, make bool false and set to 0
+    //     //If the Progress Bar value is less than 1, don't show after exiting
+    //     if(other.CompareTag("Task")){
+    //         _inTask = false;
+    //         ProgressBar_GO.GetComponent<Slider>().value = 0;
+    //         if(barValue < 1){
+    //             ProgressBar_GO.SetActive(false);
+    //         }
+    //     }
+    // }
     
     //Set's ProgressBar active and increment it
-    private void updateProgess(){
-        ProgressBar_GO.SetActive(true);
-        progressBar.IncrementProgress(.001f);
-    }
+    // private void updateProgess(){
+    //     ProgressBar_GO.SetActive(true);
+    //     progressBar.IncrementProgress(.001f);
+    // }
 
     // do dash
     private void Dash(){

@@ -15,6 +15,7 @@ public class LobbyNetworkManager : MonoBehaviourPunCallbacks
 
     [SerializeField] private Text _statusField;
     [SerializeField] private Button _leaveRoomButton;
+    [SerializeField] private Button _startGameButton;
     private List<RoomItemUI> _playerList = new List<RoomItemUI>();
 
     private List<RoomItemUI> _roomList = new List<RoomItemUI>();
@@ -47,6 +48,10 @@ public class LobbyNetworkManager : MonoBehaviourPunCallbacks
         _statusField.text = "Joined " + PhotonNetwork.CurrentRoom.Name;
         Debug.Log("Joined Room: " + PhotonNetwork.CurrentRoom.Name);
         _leaveRoomButton.interactable = true;
+
+        if(PhotonNetwork.IsMasterClient){
+            _startGameButton.interactable = true;
+        }
         UpdatePlayerList();
     }
 
@@ -54,6 +59,7 @@ public class LobbyNetworkManager : MonoBehaviourPunCallbacks
         _statusField.text = "Lobby";
         Debug.Log("LeftRoom");
         _leaveRoomButton.interactable = false;
+        _startGameButton.interactable = false;
         UpdatePlayerList();
     }
 
@@ -117,5 +123,9 @@ public class LobbyNetworkManager : MonoBehaviourPunCallbacks
 
     public void LeaveRoom(){
         PhotonNetwork.LeaveRoom();
+    }
+
+    public void OnStartGamePressed(){
+        PhotonNetwork.LoadLevel("Stage_1");
     }
 }
