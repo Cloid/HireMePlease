@@ -138,7 +138,8 @@ public class LobbyNetworkManager : MonoBehaviourPunCallbacks
         for (int i = 0; i < roomList.Count; i++)
         {
             //skip empty rooms
-            if (roomList[i].PlayerCount == 0) { continue; }
+            Debug.Log("test");
+            if(roomList[i].PlayerCount==0){ continue;}
             RoomItemUI newRoomItem = Instantiate(_roomUIPrefab);
             newRoomItem.LobbyNetworkParent = this;
             newRoomItem.SetName(roomList[i].Name);

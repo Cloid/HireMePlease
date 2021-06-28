@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using UnityEngine.UI;
+using System;
 
 public class Network : MonoBehaviourPunCallbacks
 {
@@ -11,12 +12,18 @@ public class Network : MonoBehaviourPunCallbacks
     void Start()
     {
         // Spawn the player in along with their own camera
-        playerCamera.target = PhotonNetwork.Instantiate("Player",
-            new Vector3(
-                0,
-                0,
-                0),
-                Quaternion.identity).transform;
+        try{
+            playerCamera.target = PhotonNetwork.Instantiate("Player",
+                new Vector3(
+                    0,
+                    0,
+                    0),
+                    Quaternion.identity).transform;
+        }
+        catch(Exception e){
+            Debug.LogError("No Players in Scene. Cannot Instantiate Player.");
+        }
+        
     }
 
 }
