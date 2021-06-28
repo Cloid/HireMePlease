@@ -23,23 +23,49 @@ public class LobbyNetworkManager : MonoBehaviourPunCallbacks
     private List<RoomItemUI> _playerList = new List<RoomItemUI>();
 
     private List<RoomItemUI> _roomList = new List<RoomItemUI>();
+
     // Start is called before the first frame update
     void Start()
     {
         Initialize();
-      Connect();  
+        Connect();
     }
 
     #region PhotonCallbacks
 
-    public override void OnConnectedToMaster(){
+    public override void OnConnectedToMaster()
+    {
         Debug.Log("Connected to master server");
         PhotonNetwork.JoinLobby();
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
-        UpdateRoomList(roomList);
+        Debug.Log("Current Room Count: " + roomList.Count);
+        //UpdateRoomList(roomList);
+        foreach (RoomInfo info in roomList)
+        {
+
+            if (info.RemovedFromList)
+            {
+                int index = _roomList.FindIndex(x => x.RoomInfo.Name == info.Name);
+                if(index != -1){
+                    Destroy(_roomList[index].gameObject);
+                    _roomList.RemoveAt(index);
+                }
+            }
+            else
+            {
+                RoomItemUI newRoomItem = Instantiate(_roomUIPrefab);
+                newRoomItem.LobbyNetworkParent = this;
+                newRoomItem.SetRoomInfo(info);
+                //newRoomItem.SetName(roomList[i].Name);
+                newRoomItem.transform.SetParent(_roomListParent);
+                _roomList.Add(newRoomItem);
+            }
+
+
+        }
     }
 
     public override void OnJoinedLobby()
@@ -53,18 +79,22 @@ public class LobbyNetworkManager : MonoBehaviourPunCallbacks
         Debug.Log("Joined Room: " + PhotonNetwork.CurrentRoom.Name);
         _leaveRoomButton.interactable = true;
 
-        if(PhotonNetwork.IsMasterClient){
+        if (PhotonNetwork.IsMasterClient)
+        {
             _startGameButton.interactable = true;
-        } else {
+        }
+        else
+        {
             Lobby.SetActive(false);
             LobbyReady.SetActive(true);
         }
         UpdatePlayerList();
     }
 
-  
 
-    public override void OnLeftRoom(){
+
+    public override void OnLeftRoom()
+    {
         _statusField.text = "Lobby";
         Debug.Log("LeftRoom");
         _leaveRoomButton.interactable = false;
@@ -72,36 +102,43 @@ public class LobbyNetworkManager : MonoBehaviourPunCallbacks
         UpdatePlayerList();
     }
 
-    public override void OnPlayerEnteredRoom(Photon.Realtime.Player player) {
+    public override void OnPlayerEnteredRoom(Photon.Realtime.Player player)
+    {
         UpdatePlayerList();
     }
 
-    public override void OnPlayerLeftRoom(Photon.Realtime.Player player) {
+    public override void OnPlayerLeftRoom(Photon.Realtime.Player player)
+    {
         UpdatePlayerList();
     }
 
     #endregion
 
-    private void Initialize(){
+    private void Initialize()
+    {
         _leaveRoomButton.interactable = false;
     }
-    
-    private void Connect(){
-        PhotonNetwork.NickName = "Player" + Random.Range(0,5000);
+
+    private void Connect()
+    {
+        PhotonNetwork.NickName = "Player" + Random.Range(0, 5000);
         PhotonNetwork.ConnectUsingSettings();
         PhotonNetwork.AutomaticallySyncScene = true;
     }
 
-    private void UpdateRoomList(List<RoomInfo> roomList){
+    private void UpdateRoomList(List<RoomInfo> roomList)
+    {
         //Clear the current list of rooms
-        for(int i = 0; i<_roomList.Count;i++){
+        for (int i = 0; i < _roomList.Count; i++)
+        {
             Destroy(_roomList[i].gameObject);
         }
         _roomList.Clear();
         //Generate a new list with the updated info
-        for(int i = 0; i< roomList.Count;i++){
+        for (int i = 0; i < roomList.Count; i++)
+        {
             //skip empty rooms
-            if(roomList[i].PlayerCount==0){ continue;}
+            if (roomList[i].PlayerCount == 0) { continue; }
             RoomItemUI newRoomItem = Instantiate(_roomUIPrefab);
             newRoomItem.LobbyNetworkParent = this;
             newRoomItem.SetName(roomList[i].Name);
@@ -110,17 +147,20 @@ public class LobbyNetworkManager : MonoBehaviourPunCallbacks
         }
     }
 
-    private void UpdatePlayerList(){
+    private void UpdatePlayerList()
+    {
         //Clear the current player list
-        for(int i = 0; i<_playerList.Count;i++){
+        for (int i = 0; i < _playerList.Count; i++)
+        {
             Destroy(_playerList[i].gameObject);
         }
         _playerList.Clear();
 
-        if(PhotonNetwork.CurrentRoom == null){ return; }
+        if (PhotonNetwork.CurrentRoom == null) { return; }
 
         //Generate a new list of players
-        foreach (KeyValuePair<int, Photon.Realtime.Player> player in PhotonNetwork.CurrentRoom.Players){
+        foreach (KeyValuePair<int, Photon.Realtime.Player> player in PhotonNetwork.CurrentRoom.Players)
+        {
             RoomItemUI newPlayerItem = Instantiate(_playerItemUIPrefab);
             newPlayerItem.transform.SetParent(_playerListParent);
             newPlayerItem.SetName(player.Value.NickName);
@@ -128,21 +168,26 @@ public class LobbyNetworkManager : MonoBehaviourPunCallbacks
         }
     }
 
-    public void JoinRoom(string roomName){
+    public void JoinRoom(string roomName)
+    {
         PhotonNetwork.JoinRoom(roomName);
     }
 
-    public void CreateRoom(){
-        if(string.IsNullOrEmpty(_roomInput.text) == false){
-            PhotonNetwork.CreateRoom(_roomInput.text, new RoomOptions() { MaxPlayers = 4}, null);
+    public void CreateRoom()
+    {
+        if (string.IsNullOrEmpty(_roomInput.text) == false)
+        {
+            PhotonNetwork.CreateRoom(_roomInput.text, new RoomOptions() { MaxPlayers = 4 }, null);
         }
     }
 
-    public void LeaveRoom(){
+    public void LeaveRoom()
+    {
         PhotonNetwork.LeaveRoom();
     }
 
-    public void OnStartGamePressed(){
+    public void OnStartGamePressed()
+    {
         PhotonNetwork.LoadLevel("Stage_1");
     }
 }
