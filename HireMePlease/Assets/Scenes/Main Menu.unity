@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0.99999946, b: 0.99999946, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3044,15 +3044,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 75
-    m_Right: 50
+    m_Left: 125
+    m_Right: 100
     m_Top: 10
     m_Bottom: 10
   m_ChildAlignment: 0
   fitType: 3
   rows: 5
   columns: 1
-  cellSize: {x: 375, y: 37.92766}
+  cellSize: {x: 275, y: 67.04266}
   spacing: {x: 0, y: 25}
   fitX: 1
   fitY: 1
@@ -3446,8 +3446,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 540, y: -279.81915}
-  m_SizeDelta: {x: 1080, y: 389.6383}
+  m_AnchoredPosition: {x: 540, y: -352.60666}
+  m_SizeDelta: {x: 1080, y: 535.2133}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &694020424
 MonoBehaviour:
@@ -3508,7 +3508,7 @@ MonoBehaviour:
   fitType: 3
   rows: 1
   columns: 2
-  cellSize: {x: 520, y: 359.6383}
+  cellSize: {x: 520, y: 505.21332}
   spacing: {x: 10, y: 10}
   fitX: 1
   fitY: 1
@@ -3651,8 +3651,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 800, y: -189.81915}
-  m_SizeDelta: {x: 520, y: 359.6383}
+  m_AnchoredPosition: {x: 800, y: -262.60666}
+  m_SizeDelta: {x: 520, y: 505.21332}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &746418307
 MonoBehaviour:
@@ -8099,8 +8099,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 270, y: -189.81915}
-  m_SizeDelta: {x: 520, y: 359.6383}
+  m_AnchoredPosition: {x: 270, y: -262.60666}
+  m_SizeDelta: {x: 520, y: 505.21332}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1641340516
 MonoBehaviour:

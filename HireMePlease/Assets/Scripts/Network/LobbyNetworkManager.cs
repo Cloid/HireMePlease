@@ -101,6 +101,7 @@ public class LobbyNetworkManager : MonoBehaviourPunCallbacks
         //Generate a new list with the updated info
         for(int i = 0; i< roomList.Count;i++){
             //skip empty rooms
+            Debug.Log("test");
             if(roomList[i].PlayerCount==0){ continue;}
             RoomItemUI newRoomItem = Instantiate(_roomUIPrefab);
             newRoomItem.LobbyNetworkParent = this;
