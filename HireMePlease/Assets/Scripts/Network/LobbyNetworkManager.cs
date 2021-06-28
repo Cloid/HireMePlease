@@ -16,6 +16,10 @@ public class LobbyNetworkManager : MonoBehaviourPunCallbacks
     [SerializeField] private Text _statusField;
     [SerializeField] private Button _leaveRoomButton;
     [SerializeField] private Button _startGameButton;
+
+    [SerializeField] private GameObject Lobby;
+    [SerializeField] private GameObject LobbyReady;
+
     private List<RoomItemUI> _playerList = new List<RoomItemUI>();
 
     private List<RoomItemUI> _roomList = new List<RoomItemUI>();
@@ -51,6 +55,9 @@ public class LobbyNetworkManager : MonoBehaviourPunCallbacks
 
         if(PhotonNetwork.IsMasterClient){
             _startGameButton.interactable = true;
+        } else {
+            Lobby.SetActive(false);
+            LobbyReady.SetActive(true);
         }
         UpdatePlayerList();
     }
