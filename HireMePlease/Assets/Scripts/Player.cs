@@ -46,17 +46,10 @@ public class Player : MonoBehaviour
         KeyCode.DownArrow, KeyCode.RightArrow
     };
 
-    private void Awake() {    
-        for (int idx = 0; idx < taskCount; idx++)
-        {
-            //Generate a new unique int
-            newNumber();
-            //Add new Task script to TaskList
-            TaskList.Add(new Task());
-            //Look into current index and change Task's type based on taskID
-            TaskList[idx].changeTaskType(taskID);
-            Debug.Log("TaskList: " + idx + " has taskID of " + taskID);
-        }
+    private void Awake() {
+        generateFourTasks();    
+        randomInts.Clear();
+        TaskList[taskDone].changeTaskUI();
     }
 
     // Start is called before the first frame update
@@ -191,5 +184,30 @@ public class Player : MonoBehaviour
             newNumber();
         }
 
+    }
+    
+    public void generateFourTasks(){
+        for (int idx = 0; idx < taskCount; idx++)
+        {
+            //Generate a new unique int
+            newNumber();
+            //Add new Task script to TaskList
+            TaskList.Add(new Task());
+            //Look into current index and change Task's type based on taskID
+            TaskList[idx].changeTaskType(taskID);
+            Debug.Log("TaskList: " + idx + " has taskID of " + taskID);
+        }
+    }
+
+    private void resetList(){
+        /*if(!timerdone){
+            randomInts.Clear();
+        }*/
+    }
+
+    public void taskComplete(){
+        TaskList[taskDone].Complete();
+        taskDone++;
+        TaskList[taskDone].changeTaskUI();
     }
 }
