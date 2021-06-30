@@ -132,7 +132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   barValue: 0
-  dashDist: 1
+  dashForce: 300
   photonView: {fileID: 0}
   TaskList: []
   randomInts: 
