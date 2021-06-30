@@ -22376,6 +22376,7 @@ GameObject:
   - component: {fileID: 1522815313}
   - component: {fileID: 1522815312}
   - component: {fileID: 1522815316}
+  - component: {fileID: 1522815318}
   - component: {fileID: 1522815317}
   m_Layer: 0
   m_Name: Cylinder
@@ -22486,8 +22487,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 270f3321a89869b479993413e165bf07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  task: {fileID: 330477785}
   pressEPrompt: {fileID: 1330911850}
+  CurrentInteractible: {fileID: 0}
+--- !u!114 &1522815318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522815311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b67a3e164df47e4a954a661870c7fc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _taskWindow: {fileID: 6125555893440836746}
 --- !u!1 &1574473118
 GameObject:
   m_ObjectHideFlags: 0
@@ -22758,7 +22772,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1820215433
 RectTransform:
   m_ObjectHideFlags: 0
@@ -22906,7 +22920,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1522815317}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: TaskPopup, Assembly-CSharp
         m_MethodName: closeTask
         m_Mode: 1
@@ -23243,5 +23257,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: CoffeeTask
       objectReference: {fileID: 0}
+    - target: {fileID: 6125555893066406697, guid: 82ff1116754d0f843ac7305b87b29577, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82ff1116754d0f843ac7305b87b29577, type: 3}
+--- !u!1 &6125555893440836746 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6125555893066406697, guid: 82ff1116754d0f843ac7305b87b29577, type: 3}
+  m_PrefabInstance: {fileID: 6125555893440836745}
+  m_PrefabAsset: {fileID: 0}

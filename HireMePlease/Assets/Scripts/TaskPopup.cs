@@ -1,25 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TaskPopup : MonoBehaviour {
-	public GameObject task;
+	//public GameObject task;
+    public static TaskPopup Instance;
 	public GameObject pressEPrompt;
+    public Interactible CurrentInteractible;
+    
+    private void Awake(){
+        Instance = this;
+    }
     // Start is called before the first frame update
-    void Start() {
-        
-    }
-
-    // Update is called once per frame
-    void Update() {
-        
-    }
-
     private void OnTriggerStay(Collider other) {
-    	pressEPrompt.SetActive(true);
-        if(other.CompareTag("Player")) {
+        var nom = other.gameObject.GetComponent<Player>();
+    	//pressEPrompt.SetActive(true);
+        if(nom != null && nom.photonView.IsMine) {
+            pressEPrompt.SetActive(true);
         	if(Input.GetKey(KeyCode.E)) {
-        		task.SetActive(true);
+                if(CurrentInteractible == null){ return;}
+        		CurrentInteractible.Use(true);
         	}
         }
     }
@@ -30,7 +31,4 @@ public class TaskPopup : MonoBehaviour {
     	}
     }
 
-    public void closeTask() {
-    	task.SetActive(false);
-    }
 }

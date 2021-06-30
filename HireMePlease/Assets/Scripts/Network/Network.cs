@@ -21,7 +21,7 @@ public class Network : MonoBehaviourPunCallbacks
                     Quaternion.identity).transform;
         }
         catch(Exception e){
-            Debug.LogError("No Players in Scene. Cannot Instantiate Player.");
+            Debug.LogError("No Players in Scene. Cannot Instantiate Player." + e);
         }
         
     }
