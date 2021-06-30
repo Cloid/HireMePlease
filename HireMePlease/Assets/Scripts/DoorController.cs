@@ -16,13 +16,13 @@ public class DoorController : MonoBehaviour
     private void onDoorwayOpen(int id)
     {
         if(id == this.id)
-        LeanTween.moveLocalY(gameObject, 7.5f, 1f).setEaseOutQuad();
+        LeanTween.moveLocalY(gameObject, 3.32f, 1f).setEaseOutQuad();
     }
 
     private void onDoorwayExit(int id)
     {
         if(id == this.id)
-        LeanTween.moveLocalY(gameObject, 2.53f, 1f).setEaseInQuad();
+        LeanTween.moveLocalY(gameObject, -8.5f, 1f).setEaseInQuad();
     }
 
     private void OnDestroy() {

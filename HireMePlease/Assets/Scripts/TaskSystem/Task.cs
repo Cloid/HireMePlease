@@ -26,22 +26,22 @@ public class Task
     public void changeTaskType(int id){
         taskID = id;
         if(taskID == 0){
-            Debug.Log("Coffee Task");
+            //Debug.Log("Coffee Task");
             title = "Coffee Run!";
             description = "Go get some coffee intern!";
             Debug.Log("Hello?" + title);
         } else if (taskID == 1){
-            Debug.Log("Some Task");
+            //Debug.Log("Some Task");
             title = "Some Task";
             description = "Some Desc";
 
         } else if (taskID == 2){
-            Debug.Log("Some Task 2");
+            //Debug.Log("Some Task 2");
             title = "Some Task";
             description = "Some Desc2";
 
         } else if (taskID == 3){
-            Debug.Log("Some Task 3");
+            //Debug.Log("Some Task 3");
             title = "Some Task3";
             description = "Some Desc3";
         }

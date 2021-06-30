@@ -218,7 +218,7 @@ public class Player : MonoBehaviour
             TaskList.Add(new Task());
             //Look into current index and change Task's type based on taskID
             TaskList[idx].changeTaskType(taskID);
-            Debug.Log("TaskList: " + idx + " has taskID of " + taskID);
+            //Debug.Log("TaskList: " + idx + " has taskID of " + taskID);
         }
     }
 
