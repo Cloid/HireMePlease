@@ -2,20 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class CoffeeButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+public class CoffeeButton : MonoBehaviour, IPointerDownHandler
 {
     public GameObject liquid;
+    public GameObject CoffeeTask;
 
+    private void OnEnable() {
+        liquid.SetActive(false);
+        CoffeeTask.GetComponent<CoffeeTaskScript>().IsTaskCompleted = false;
+    }
     public void OnPointerDown(PointerEventData eventData)
     {
-        //Debug.Log(this.gameObject.name + " Was Clicked.");
-        liquid.GetComponent<ParticleSystem>().Play();
-    }
-
-    public void OnPointerUp(PointerEventData eventData)
-    {
-        //Debug.Log(this.gameObject.name + " Was Clicked.");
-        liquid.GetComponent<ParticleSystem>().Stop();
+        liquid.SetActive(true);
+        CoffeeTask.GetComponent<CoffeeTaskScript>().IsTaskCompleted = true;
     }
 }
