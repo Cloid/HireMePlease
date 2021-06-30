@@ -14,8 +14,10 @@ public class TaskPopup : MonoBehaviour {
     }
     // Start is called before the first frame update
     private void OnTriggerStay(Collider other) {
-    	pressEPrompt.SetActive(true);
-        if(other.CompareTag("Player")) {
+        var nom = other.gameObject.GetComponent<Player>();
+    	//pressEPrompt.SetActive(true);
+        if(nom != null && nom.photonView.IsMine) {
+            pressEPrompt.SetActive(true);
         	if(Input.GetKey(KeyCode.E)) {
                 if(CurrentInteractible == null){ return;}
         		CurrentInteractible.Use(true);
