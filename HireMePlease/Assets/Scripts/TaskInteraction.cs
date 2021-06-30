@@ -29,8 +29,8 @@ public class TaskInteraction : MonoBehaviourPun
                 break;
             }
 
-            if(TaskPopup.Instance.CurrentInteractible != null &&
-                TaskPopup.Instance.CurrentInteractible != newTarget){
+            if(TaskPopup.Instance.CurrentInteractible != newTarget &&
+                TaskPopup.Instance.CurrentInteractible != null){
                 TaskPopup.Instance.CurrentInteractible.Use(false);
             }
 
