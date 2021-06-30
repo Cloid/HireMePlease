@@ -23,7 +23,8 @@ public class Player : MonoBehaviour
     public float barValue;
     private Vector3 lastDir;
     private Vector3 lastHeading;
-    public float dashDist = 1.0f;
+    //[Range(1.0f, 10.0f)] // dash dist
+    public float dashDist = 9.0f;
 
     public PhotonView photonView;
 
@@ -128,19 +129,45 @@ public class Player : MonoBehaviour
 
     //move if you can, stay if you cant
     private bool TryDash(Vector3 moveHeading, float distance) {
-        bool canMove = CanMove(moveHeading, distance);
-        if (canMove) {
-            lastHeading = moveHeading;
-            transform.position += lastHeading * distance;
-            return true;
+        // bool canMove = CanMove(moveHeading, distance);
+        // if (canMove) {
+        //     lastHeading = moveHeading;
+        //     transform.position += lastHeading * distance;
+        //     return true;
+        // }
+        // else {
+        //     return false;
+        // }
+
+        RaycastHit hit;
+        Ray ray = new Ray(transform.position, moveHeading);
+        if (Physics.Raycast(ray, out hit, distance)) {
+            //if we hit the wall move to the wall
+            Debug.Log(hit.collider.tag);
+            if (hit.collider.tag == "map") {
+                //TryDash(moveHeading,Vector3.Distance(hit.point,transform.position));
+                lastHeading = moveHeading;
+                transform.position = hit.point;
+            }
         }
         else {
-            return false;
+            lastHeading = moveHeading;
+            transform.position += lastHeading * distance;
         }
+        return true;
     }
     //was canDash
     //make sure we dont move through solid things
     private bool CanMove(Vector3 dir, float dist) {
-        return Physics2D.Raycast(transform.position, dir, dist).collider == null;
+        RaycastHit hit;
+        Ray ray = new Ray(transform.position, dir);
+        if (Physics.Raycast(ray, out hit, dist)) {
+            if (hit.collider.tag == "map") {
+                return false;
+            }
+        }
+        //Debug.Log(Physics2D.Raycast(transform.position, dir, dist));
+        //return Physics.Raycast(transform.position, dir, dist) == null;
+        return true;
     }
 }
