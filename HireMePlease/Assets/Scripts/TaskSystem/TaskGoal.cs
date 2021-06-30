@@ -10,20 +10,10 @@ public class TaskGoal : MonoBehaviour
     public bool isReached(){
         return (currentAmount>=requiredAmount);
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
 
 public enum GoalType{
-    Test,
+    Coffee,
     Test2
 }
