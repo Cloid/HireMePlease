@@ -28,14 +28,30 @@ public class Player : MonoBehaviour
 
     public PhotonView photonView;
 
-    private KeyCode[] keycodes = new KeyCode[] 
+    //List of Tasks for Player
+    public List<Task> TaskList = new List<Task>();
+    //Unique Random Int list
+    public List<int> randomInts = new List<int>();
+    //taskID for Tasks
+    private int taskID = -1;
+    //Amount of tasks for player
+    private int taskCount = 3;
+    //Task Done for Player
+    public int taskDone = 0;
+    private KeyCode[] keycodes = new KeyCode[]
     {
         KeyCode.W, KeyCode.A,
         KeyCode.S, KeyCode.D,
 
         KeyCode.UpArrow, KeyCode.LeftArrow,
-        KeyCode.DownArrow, KeyCode.RightArrow 
+        KeyCode.DownArrow, KeyCode.RightArrow
     };
+
+    private void Awake() {
+        generateFourTasks();    
+        randomInts.Clear();
+        TaskList[taskDone].changeTaskUI();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -46,8 +62,10 @@ public class Player : MonoBehaviour
         forward.y = 0;
         //Gives space to not "flip" the player
         forward = Vector3.Normalize(forward);
-        right = Quaternion.Euler(new Vector3(0,90,0)) * forward;
+        right = Quaternion.Euler(new Vector3(0, 90, 0)) * forward;
         photonView = GetComponent<PhotonView>();
+
+
     }
 
     // Update is called once per frame
@@ -58,7 +76,7 @@ public class Player : MonoBehaviour
 
         // //If inside a Task Trigger Area and Holding Space, proceed
         // if(_inTask && Input.GetKey(KeyCode.Space)){
-            
+
         //     //If Task is done, don't update otherwise update progress
         //     if(barValue >= 1){
         //         ProgressBar_GO.SetActive(false);
@@ -66,21 +84,24 @@ public class Player : MonoBehaviour
         //         updateProgess();
         //     }
         // }
-        
+
         //Input Movements
         //add keys by adding them to the keycodes list
-        if(photonView.IsMine){
-            if(keycodes.Any(code => Input.GetKey(code))) {
-            Move();
-            //Debug.Log(keycodes.Any(code => Input.GetKey(code)));
-             }
-        //dash handler
+        if (photonView.IsMine)
+        {
+            if (keycodes.Any(code => Input.GetKey(code)))
+            {
+                Move();
+                //Debug.Log(keycodes.Any(code => Input.GetKey(code)));
+            }
+            //dash handler
             Dash();
         }
-        
+
     }
 
-    private void Move(){
+    private void Move()
+    {
         //Vector intilization for movements and edge cases for flipping/normalizing
         Vector3 direction = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         Vector3 rightMovement = right * speed * Time.deltaTime * Input.GetAxis("Horizontal");
@@ -112,7 +133,7 @@ public class Player : MonoBehaviour
     //         }
     //     }
     // }
-    
+
     //Set's ProgressBar active and increment it
     // private void updateProgess(){
     //     ProgressBar_GO.SetActive(true);
@@ -120,8 +141,10 @@ public class Player : MonoBehaviour
     // }
 
     // do dash
-    private void Dash(){
-        if (Input.GetKeyDown(KeyCode.F)) {
+    private void Dash()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
             TryDash(lastHeading, dashDist);
             //transform.position += lastHeading * dashDist;
         }
@@ -169,5 +192,45 @@ public class Player : MonoBehaviour
         //Debug.Log(Physics2D.Raycast(transform.position, dir, dist));
         //return Physics.Raycast(transform.position, dir, dist) == null;
         return true;
+    }
+
+    private void newNumber()
+    {
+
+        taskID = Random.Range(0, 3);
+        //Debug.Log("Current taskID: " + taskID);
+        if (!randomInts.Contains(taskID))
+        {
+            //Debug.Log("Added to list: " + taskID);
+            randomInts.Add(taskID);
+        } else if(randomInts.Count != taskCount) {
+            newNumber();
+        }
+
+    }
+    
+    public void generateFourTasks(){
+        for (int idx = 0; idx < taskCount; idx++)
+        {
+            //Generate a new unique int
+            newNumber();
+            //Add new Task script to TaskList
+            TaskList.Add(new Task());
+            //Look into current index and change Task's type based on taskID
+            TaskList[idx].changeTaskType(taskID);
+            Debug.Log("TaskList: " + idx + " has taskID of " + taskID);
+        }
+    }
+
+    private void resetList(){
+        /*if(!timerdone){
+            randomInts.Clear();
+        }*/
+    }
+
+    public void taskComplete(){
+        TaskList[taskDone].Complete();
+        taskDone++;
+        TaskList[taskDone].changeTaskUI();
     }
 }

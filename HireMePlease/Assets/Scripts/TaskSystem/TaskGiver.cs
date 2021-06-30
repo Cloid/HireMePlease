@@ -1,22 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class TaskGiver : MonoBehaviour
 {
 
     public Task task;
     public Player player;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public GameObject taskWindow;
+    public Text titleText;
+    public Text descText;
+    
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void OpenTaskWindow(){
+        taskWindow.SetActive(true);
     }
 }
