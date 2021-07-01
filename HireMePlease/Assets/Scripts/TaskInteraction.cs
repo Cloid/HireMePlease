@@ -7,16 +7,34 @@ public class TaskInteraction : MonoBehaviourPun
 {
     [SerializeField] private float _range = 10.0f;
     private Interactible _target;
+    private LineRenderer _lineRenderer;
 
     private void Awake() {
         if(!photonView.IsMine){return;}
+        _lineRenderer = GetComponent<LineRenderer>();
         StartCoroutine(SearchForInteraction());
+    }
+
+    private void Update() {
+        if(!photonView.IsMine){return;}
+
+        if(_target != null){
+            _lineRenderer.SetPosition(0, transform.position);
+            _lineRenderer.SetPosition(1, _target.transform.position);
+        }
+
+        else{
+            _lineRenderer.SetPosition(0, Vector3.zero);
+            _lineRenderer.SetPosition(1, Vector3.zero);
+        }
     }
     // Start is called before the first frame update
     private IEnumerator SearchForInteraction(){
         while(true) {
             Interactible newTarget = null;
             Interactible[] interactionList = FindObjectsOfType<Interactible>();
+
+            //Debug.Log(interactionList);
         
             foreach(Interactible interactible in interactionList){
                 float distance = Vector3.Distance(transform.position, interactible.transform.position);
@@ -31,11 +49,15 @@ public class TaskInteraction : MonoBehaviourPun
 
             if(TaskPopup.Instance.CurrentInteractible != newTarget &&
                 TaskPopup.Instance.CurrentInteractible != null){
-                TaskPopup.Instance.CurrentInteractible.Use(false);
+                Debug.Log("Got too far. Disabling task");
+                TaskPopup.Instance.CurrentInteractible.Use(false, null);
             }
 
             _target = newTarget;
             TaskPopup.Instance.CurrentInteractible = _target;
+
+            //Debug.Log(transform.parent.gameObject.name);
+            TaskPopup.Instance.CurrentPlayer = transform.parent.gameObject;
 
             yield return new WaitForSeconds(0.25f);
         }
