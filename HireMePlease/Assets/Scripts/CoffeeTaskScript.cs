@@ -14,11 +14,11 @@ public class CoffeeTaskScript : MonoBehaviour
         
         while(!IsTaskCompleted){
             if(!IsTaskCompleted){
-                Debug.Log("COFFE TASK INCOMPLETE");
+                //Debug.Log("COFFE TASK INCOMPLETE");
             }
             yield return new WaitForSeconds(0.5f);
         }
-        Debug.Log("COFFE TASK IS NOW COMPLETE");
+        //Debug.Log("COFFE TASK IS NOW COMPLETE");
         yield return new WaitForSeconds(3f);
         gameObject.SetActive(false);
     }
