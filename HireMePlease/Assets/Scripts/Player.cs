@@ -40,6 +40,8 @@ public class Player : MonoBehaviour
     private int taskCount = 3;
     //Task Done for Player
     public int taskDone = 0;
+    public int bonusPt = 0;
+    public bool callOnce = false;
     private KeyCode[] keycodes = new KeyCode[]
     {
         KeyCode.W, KeyCode.A,
@@ -193,5 +195,23 @@ public class Player : MonoBehaviour
         TaskList[taskDone].Complete();
         taskDone++;
         TaskList[taskDone].changeTaskUI();
+    }
+
+    public void bonusAdd(){
+        if(!callOnce){
+            callOnce = true;
+            bonusPt++;
+        }
+    }
+
+    public void bonusDc(){
+        if(callOnce){
+            callOnce = false;
+            bonusPt--;
+        }
+    }
+
+    public void addPts(){
+        taskDone += bonusPt;
     }
 }
