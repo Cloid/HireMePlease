@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
     //taskID for Tasks
     private int taskID = -1;
     //Amount of tasks for player
-    private int taskCount = 3;
+    private int taskCount = 2;
     //Task Done for Player
     public int taskDone = 0;
     public int bonusPt = 0;
@@ -52,8 +52,7 @@ public class Player : MonoBehaviour
     };
 
     private void Awake() {
-        generateFourTasks();    
-        randomInts.Clear();
+        generateThreeTasks();    
         TaskList[taskDone].changeTaskUI();
     }
 
@@ -172,7 +171,7 @@ public class Player : MonoBehaviour
         }
     }
     
-    public void generateFourTasks(){
+    public void generateThreeTasks(){
         for (int idx = 0; idx < taskCount; idx++)
         {
             //Generate a new unique int
@@ -183,6 +182,8 @@ public class Player : MonoBehaviour
             TaskList[idx].changeTaskType(taskID);
             //Debug.Log("TaskList: " + idx + " has taskID of " + taskID);
         }
+        randomInts.Clear();
+        Debug.Log("Count: " + TaskList.Count());
     }
 
     private void resetList(){
@@ -192,6 +193,7 @@ public class Player : MonoBehaviour
     }
 
     public void taskComplete(){
+        Debug.Log("Task Done: " + taskDone);
         TaskList[taskDone].Complete();
         taskDone++;
         TaskList[taskDone].changeTaskUI();

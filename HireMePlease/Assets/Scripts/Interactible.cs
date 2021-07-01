@@ -6,11 +6,29 @@ public class Interactible : MonoBehaviour
 {
     [SerializeField] private GameObject _taskWindow;
 
-    public void Use(bool isActive, GameObject player){
-        if(player == null){return;}
-        Player playerInstance =  player.GetComponent<Player>();
-        if(playerInstance == null){return;}
-        if(playerInstance.TaskList[playerInstance.taskDone].taskID == 0 && _taskWindow.name == "CoffeeTask"){
+    public void Use(bool isActive, GameObject player)
+    {
+        if (player == null)
+        {
+            _taskWindow.SetActive(isActive);
+            return;
+        }
+
+        Player playerInstance = player.GetComponent<Player>();
+        if (playerInstance == null) { return; }
+
+        if (playerInstance.TaskList[playerInstance.taskDone].taskID == 0 && _taskWindow.name == "CoffeeTask")
+        {
+            _taskWindow.SetActive(isActive);
+            _taskWindow.GetComponent<GetPlayer>().player = player;
+        }
+        else if (playerInstance.TaskList[playerInstance.taskDone].taskID == 1 && _taskWindow.name == "TrashTask")
+        {
+            _taskWindow.SetActive(isActive);
+            _taskWindow.GetComponent<GetPlayer>().player = player;
+        }
+        else if (playerInstance.TaskList[playerInstance.taskDone].taskID == 2 && _taskWindow.name == "PresentationTask")
+        {
             _taskWindow.SetActive(isActive);
             _taskWindow.GetComponent<GetPlayer>().player = player;
         }

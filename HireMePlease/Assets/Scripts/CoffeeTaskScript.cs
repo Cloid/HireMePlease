@@ -21,6 +21,15 @@ public class CoffeeTaskScript : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
         }
         //Debug.Log("COFFE TASK IS NOW COMPLETE");
+        //GetComponent<GetPlayer>().player.GetComponent<Player>().taskComplete();
+
+        Player currPlayer = GetComponent<GetPlayer>().player.GetComponent<Player>();
+        currPlayer.taskComplete();
+        
+        if(currPlayer.taskDone % 3 == 0){
+            currPlayer.generateThreeTasks();
+        }
+
         yield return new WaitForSeconds(3f);
 
         //THIS IS WHERE WE GIVE POINTS
