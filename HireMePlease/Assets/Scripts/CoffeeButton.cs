@@ -11,7 +11,6 @@ public class CoffeeButton : MonoBehaviour, IPointerDownHandler
 
     private void OnEnable() {
         liquid.SetActive(false);
-        CoffeeTask.GetComponent<CoffeeTaskScript>().IsTaskCompleted = false;
     }
     public void OnPointerDown(PointerEventData eventData)
     {
