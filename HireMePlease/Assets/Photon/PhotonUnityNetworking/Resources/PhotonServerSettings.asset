@@ -39,6 +39,8 @@ MonoBehaviour:
   - Fire
   - RespawnSpaceship
   - eventAction
+  - markCount
+  - playerIndex
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
