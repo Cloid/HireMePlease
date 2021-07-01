@@ -9,11 +9,11 @@ public class TaskPopup : MonoBehaviour {
     public static TaskPopup Instance;
 	public GameObject pressEPrompt;
     public Interactible CurrentInteractible;
+    public GameObject CurrentPlayer;
     
     private void Awake(){
         Instance = this;
     }
-
 
     // Start is called before the first frame update
     // // private void OnTriggerStay(Collider other) {
@@ -35,7 +35,7 @@ public class TaskPopup : MonoBehaviour {
             //pressEPrompt.SetActive(true);
         	if(Input.GetKey(KeyCode.E)) {
                 if(CurrentInteractible == null){ return;}
-        		CurrentInteractible.Use(true);
+        		CurrentInteractible.Use(true, CurrentPlayer);
         	}
         //}
     }

@@ -50,11 +50,14 @@ public class TaskInteraction : MonoBehaviourPun
             if(TaskPopup.Instance.CurrentInteractible != newTarget &&
                 TaskPopup.Instance.CurrentInteractible != null){
                 Debug.Log("Got too far. Disabling task");
-                TaskPopup.Instance.CurrentInteractible.Use(false);
+                TaskPopup.Instance.CurrentInteractible.Use(false, null);
             }
 
             _target = newTarget;
             TaskPopup.Instance.CurrentInteractible = _target;
+
+            //Debug.Log(transform.parent.gameObject.name);
+            TaskPopup.Instance.CurrentPlayer = transform.parent.gameObject;
 
             yield return new WaitForSeconds(0.25f);
         }

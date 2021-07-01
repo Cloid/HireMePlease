@@ -6,6 +6,8 @@ public class CoffeeTaskScript : MonoBehaviour
 {
     // Start is called before the first frame update
     public bool IsTaskCompleted = false;
+    //public GameObject currentPlayer;
+    
     private void OnEnable(){
         IsTaskCompleted = false;
         StartCoroutine(CheckTaskCompletion());
@@ -20,6 +22,10 @@ public class CoffeeTaskScript : MonoBehaviour
         }
         //Debug.Log("COFFE TASK IS NOW COMPLETE");
         yield return new WaitForSeconds(3f);
+
+        //THIS IS WHERE WE GIVE POINTS
+        Debug.Log(gameObject.GetComponent<GetPlayer>().player);
+        
         gameObject.SetActive(false);
     }
 }
