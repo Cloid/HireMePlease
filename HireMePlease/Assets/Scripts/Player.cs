@@ -9,7 +9,7 @@ using Photon.Pun;
 public class Player : MonoBehaviour
 {
     //Player Speed Movement
-    public float speed = 5f;
+    public float speed = 10.0f;
 
     //Vector Intilization for movements
     Vector3 forward;
@@ -24,7 +24,9 @@ public class Player : MonoBehaviour
     private Vector3 lastDir;
     private Vector3 lastHeading;
     //[Range(1.0f, 10.0f)] // dash dist
-    public float dashForce = 300.0f;
+    public float dashForce = 1000.0f;
+    public float dashCooldown = 2.2f;
+    private float nextDashAvailable = 0.0f; 
 
     public PhotonView photonView;
 
@@ -38,6 +40,8 @@ public class Player : MonoBehaviour
     private int taskCount = 3;
     //Task Done for Player
     public int taskDone = 0;
+    public int bonusPt = 0;
+    public bool callOnce = false;
     private KeyCode[] keycodes = new KeyCode[]
     {
         KeyCode.W, KeyCode.A,
@@ -64,8 +68,6 @@ public class Player : MonoBehaviour
         forward = Vector3.Normalize(forward);
         right = Quaternion.Euler(new Vector3(0, 90, 0)) * forward;
         photonView = GetComponent<PhotonView>();
-
-
     }
 
     // Update is called once per frame
@@ -89,15 +91,15 @@ public class Player : MonoBehaviour
         //add keys by adding them to the keycodes list
         if (photonView.IsMine)
         {
+            //dont touch the lambda
             if (keycodes.Any(code => Input.GetKey(code)))
             {
                 Move();
                 //Debug.Log(keycodes.Any(code => Input.GetKey(code)));
             }
             //dash handler
-            Dash();
+            DashHandler();
         }
-
     }
 
     private void Move()
@@ -140,68 +142,25 @@ public class Player : MonoBehaviour
     //     progressBar.IncrementProgress(.001f);
     // }
 
-    // do dash
-    private void Dash(){
+    // do the dash (maybe)
+    private void DashHandler(){
         if (Input.GetKeyDown(KeyCode.Space)) {
-            bonk(lastHeading, dashForce);
+            if (Time.time >nextDashAvailable) {
+                bonk(lastHeading, dashForce);
+                nextDashAvailable = Time.time + dashCooldown;
+            }
             //transform.position += lastHeading * dashDist;
         }
     }
 
+    //slap the player in a direction like its missbehaving
     private void bonk (Vector3 heading, float force) {
         Debug.Log("heading "+heading+ "\ncalculated force "+(heading*force));
         this.GetComponent<Rigidbody>().AddForce(heading * force);
     }
 
-    //move if you can, stay if you cant
-    // private bool TryDash(Vector3 moveHeading, float distance) {
-
-
-    //     bool canMove = CanMove(moveHeading, distance);
-    //     if (canMove) {
-    //         lastHeading = moveHeading;
-    //         transform.position += lastHeading * distance;
-    //         return true;
-    //     }
-    //     else {
-    //         return false;
-    //     }
-
-    //     RaycastHit hit;
-    //     Ray ray = new Ray(transform.position, moveHeading);
-    //     if (Physics.Raycast(ray, out hit, distance)) {
-    //         //if we hit the wall move to the wall
-    //         Debug.Log(hit.collider.tag);
-    //         if (hit.collider.tag == "map") {
-    //             //TryDash(moveHeading,Vector3.Distance(hit.point,transform.position));
-    //             lastHeading = moveHeading;
-    //             transform.position = hit.point;
-    //         }
-    //     }
-    //     else {
-    //         lastHeading = moveHeading;
-    //         transform.position += lastHeading * distance;
-    //     }
-    //     return true;
-    // }
-    //was canDash
-    //make sure we dont move through solid things
-    // private bool CanMove(Vector3 dir, float dist) {
-    //     RaycastHit hit;
-    //     Ray ray = new Ray(transform.position, dir);
-    //     if (Physics.Raycast(ray, out hit, dist)) {
-    //         if (hit.collider.tag == "map") {
-    //             return false;
-    //         }
-    //     }
-    //     //Debug.Log(Physics2D.Raycast(transform.position, dir, dist));
-    //     //return Physics.Raycast(transform.position, dir, dist) == null;
-    //     return true;
-    // }
-
     private void newNumber()
     {
-
         taskID = Random.Range(0, 3);
         //Debug.Log("Current taskID: " + taskID);
         if (!randomInts.Contains(taskID))
@@ -211,7 +170,6 @@ public class Player : MonoBehaviour
         } else if(randomInts.Count != taskCount) {
             newNumber();
         }
-
     }
     
     public void generateFourTasks(){
@@ -237,5 +195,23 @@ public class Player : MonoBehaviour
         TaskList[taskDone].Complete();
         taskDone++;
         TaskList[taskDone].changeTaskUI();
+    }
+
+    public void bonusAdd(){
+        if(!callOnce){
+            callOnce = true;
+            bonusPt++;
+        }
+    }
+
+    public void bonusDc(){
+        if(callOnce){
+            callOnce = false;
+            bonusPt--;
+        }
+    }
+
+    public void addPts(){
+        taskDone += bonusPt;
     }
 }
