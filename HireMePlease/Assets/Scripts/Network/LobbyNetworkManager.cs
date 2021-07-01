@@ -19,6 +19,8 @@ public class LobbyNetworkManager : MonoBehaviourPunCallbacks
 
     [SerializeField] private GameObject Lobby;
     [SerializeField] private GameObject LobbyReady;
+    
+    [SerializeField ]private GameObject playerCount;
 
     private List<RoomItemUI> _playerList = new List<RoomItemUI>();
 
@@ -27,6 +29,9 @@ public class LobbyNetworkManager : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
+        if(playerCount==null){
+            playerCount = GameObject.Find("DontDestroy");
+        }
         Initialize();
         Connect();
     }
@@ -78,6 +83,9 @@ public class LobbyNetworkManager : MonoBehaviourPunCallbacks
         _statusField.text = "Joined " + PhotonNetwork.CurrentRoom.Name;
         Debug.Log("Joined Room: " + PhotonNetwork.CurrentRoom.Name);
         _leaveRoomButton.interactable = true;
+
+        Debug.Log("Current Players: "+ PhotonNetwork.CurrentRoom.PlayerCount);
+        playerCount.GetComponent<NeverDestroy>().playerIndex = PhotonNetwork.CurrentRoom.PlayerCount;
 
         if (PhotonNetwork.IsMasterClient)
         {
