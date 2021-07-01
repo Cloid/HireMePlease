@@ -215,5 +215,6 @@ public class Player : MonoBehaviour
 
     public void addPts(){
         taskDone += bonusPt;
+        bonusPt = 0;
     }
 }
