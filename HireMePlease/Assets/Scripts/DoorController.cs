@@ -25,6 +25,20 @@ public class DoorController : MonoBehaviour
         LeanTween.moveLocalY(gameObject, -8.5f, 1f).setEaseInQuad();
     }
 
+    public void onMeetingDoorOpen(int id){
+        if(id == 1){
+            LeanTween.moveLocalY(gameObject, 3.32f, 5f).setEaseOutQuad();
+        }
+    }
+
+    public void onMeetingDoorExit(int id)
+    {
+        Debug.Log("Called");
+        if(id == 1){
+            LeanTween.moveLocalY(gameObject, -8.5f, 5f).setEaseInQuad();
+        }
+    }
+
     private void OnDestroy() {
         GameEvents.current.onDoorwayTriggerEnter -= onDoorwayOpen;
         GameEvents.current.onDoorwayTriggerExit -= onDoorwayExit;
