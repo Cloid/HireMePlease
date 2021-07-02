@@ -30,6 +30,14 @@ public class TrashTaskLogic : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
         }
         Debug.Log("TRASH TASK COMPLETE");
+        //Giving Player Points when Task is done
+        Player currPlayer = GetComponent<GetPlayer>().player.GetComponent<Player>();
+        currPlayer.taskComplete();
+        
+        if(currPlayer.taskDone % 3 == 0){
+            currPlayer.generateThreeTasks();
+        }
+
         yield return new WaitForSeconds(3f);
         gameObject.SetActive(false);
     }

@@ -32,18 +32,16 @@ public class Task
             Debug.Log("Hello?" + title);
         } else if (taskID == 1){
             //Debug.Log("Some Task");
-            title = "Some Task";
-            description = "Some Desc";
+            title = "Throw Trash";
+            description = "Pick up trash and throw it away";
+
 
         } else if (taskID == 2){
-            //Debug.Log("Some Task 2");
-            title = "Some Task";
-            description = "Some Desc2";
+            title = "Make Presentation";
+            description = "Make a presentation";
 
-        } else if (taskID == 3){
-            //Debug.Log("Some Task 3");
-            title = "Some Task3";
-            description = "Some Desc3";
+            //Debug.Log("Some Task 2");
+
         }
         
 
