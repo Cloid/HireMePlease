@@ -26,10 +26,6 @@ public class CoffeeTaskScript : MonoBehaviour
         Player currPlayer = GetComponent<GetPlayer>().player.GetComponent<Player>();
         currPlayer.taskComplete();
         
-        if(currPlayer.taskDone % 3 == 0){
-            currPlayer.generateThreeTasks();
-        }
-
         yield return new WaitForSeconds(3f);
         //THIS IS WHERE WE GIVE POINTS
         Debug.Log(gameObject.GetComponent<GetPlayer>().player);
