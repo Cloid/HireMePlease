@@ -18,6 +18,7 @@ public class PresentationTaskLogic : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
         }
         Debug.Log("PRESENTATION TASK COMPLETE");
+
         
         Player currPlayer = GetComponent<GetPlayer>().player.GetComponent<Player>();
         currPlayer.taskComplete();
