@@ -156,6 +156,7 @@ public class LobbyNetworkManager : MonoBehaviourPunCallbacks
 
         UpdatePlayerList();
     }
+    
 
 
 
