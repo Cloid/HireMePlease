@@ -29,16 +29,19 @@ public class Task
             //Debug.Log("Coffee Task");
             title = "Coffee Run!";
             description = "Go get some coffee intern!";
-            Debug.Log("Hello?" + title);
         } else if (taskID == 1){
             //Debug.Log("Some Task");
             title = "Throw Trash";
             description = "Pick up trash and throw it away";
-
-
         } else if (taskID == 2){
             title = "Make Presentation";
             description = "Make a presentation";
+        } else if (taskID == 3){
+            title = "Shredder";
+            description = "Shred paper!";
+        } else if (taskID == 4){
+            title = "Close Popups";
+            description = "Close all Popups!";
 
             //Debug.Log("Some Task 2");
 

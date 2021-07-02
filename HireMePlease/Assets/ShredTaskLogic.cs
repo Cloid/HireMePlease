@@ -23,6 +23,8 @@ public class ShredTaskLogic : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
         }
         Debug.Log("SHRED TASK COMPLETE");
+        Player currPlayer = GetComponent<GetPlayer>().player.GetComponent<Player>();
+        currPlayer.taskComplete();
         yield return new WaitForSeconds(3f);
         gameObject.SetActive(false);
     }

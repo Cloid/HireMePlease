@@ -31,6 +31,20 @@ public class Interactible : MonoBehaviour
         {
             _taskWindow.SetActive(isActive);
             _taskWindow.GetComponent<GetPlayer>().player = player;
+        } else if (playerInstance.TaskList[playerInstance.taskDone].taskID == 3 && _taskWindow.name == "ShredPaperTask")
+        {
+            Debug.Log("Test");
+            _taskWindow.SetActive(isActive);
+            _taskWindow.GetComponent<GetPlayer>().player = player;
+                                    Debug.Log("lmaooo");
+
+        } else if (playerInstance.TaskList[playerInstance.taskDone].taskID == 4 && _taskWindow.name == "SpamTask")
+        {
+                        Debug.Log("Test2");
+            _taskWindow.SetActive(isActive);
+            _taskWindow.GetComponent<GetPlayer>().player = player;
+                                                Debug.Log("lmaooo22222");
+
         }
     }
 }
