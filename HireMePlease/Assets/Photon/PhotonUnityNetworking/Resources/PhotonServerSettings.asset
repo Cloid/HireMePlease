@@ -41,6 +41,7 @@ MonoBehaviour:
   - eventAction
   - markCount
   - playerIndex
+  - SyncValues
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
