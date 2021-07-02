@@ -8,12 +8,14 @@ using UnityEngine.UI;
 public class LobbyNetworkManager : MonoBehaviourPunCallbacks
 {
     [SerializeField] private InputField _roomInput;
+    [SerializeField] private InputField _username;
     [SerializeField] private RoomItemUI _roomUIPrefab;
     [SerializeField] private Transform _roomListParent;
     [SerializeField] private RoomItemUI _playerItemUIPrefab;
     [SerializeField] private Transform _playerListParent;
 
     [SerializeField] private Text _statusField;
+    [SerializeField] private Text _usernameField;
     [SerializeField] private Button _leaveRoomButton;
     [SerializeField] private Button _startGameButton;
 
@@ -134,6 +136,11 @@ public class LobbyNetworkManager : MonoBehaviourPunCallbacks
         PhotonNetwork.AutomaticallySyncScene = true;
     }
 
+    public void newName()
+    {
+        PhotonNetwork.NickName = _username.text;
+        _usernameField.text = PhotonNetwork.NickName;
+    }
     private void UpdateRoomList(List<RoomInfo> roomList)
     {
         //Clear the current list of rooms
