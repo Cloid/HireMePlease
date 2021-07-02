@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
     //taskID for Tasks
     private int taskID = -1;
     //Amount of tasks for player
-    private int taskCount = 2;
+    private int taskCount = 3;
     //Task Done for Player
     public int taskDone = 0;
     public int bonusPt = 0;

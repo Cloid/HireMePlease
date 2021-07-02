@@ -21,14 +21,22 @@ public class SortingLeaderboard : MonoBehaviour
         for(int idx = 0; idx < goList.Length;idx++){
             Player currPlayer = goList[idx].GetComponent<Player>().GetComponent<Player>();
             currPlayer.addPts();
-            currPlayer.photonView.RPC("SyncValue", Photon.Pun.RpcTarget.AllBuffered, currPlayer.taskDone, currPlayer.bonusPt);
+            currPlayer.photonView.RPC("SyncValues", Photon.Pun.RpcTarget.AllBuffered, currPlayer.taskDone, currPlayer.bonusPt);
         }
 
         var newList = goList.OrderBy(e => e.GetComponent<Player>().taskDone).ToList();
         
-        foreach(GameObject go in newList){
-           int idx = go.GetComponent<Player>().taskDone;
-           Debug.Log(idx);
+        for(int idx = 0; idx < newList.Count; idx++){
+            Player currPlayer = newList[idx].GetComponent<Player>().GetComponent<Player>();
+            if(currPlayer.taskDone == 0){
+                newList.Add(newList[idx]);
+                newList.Remove(newList[idx]);
+            }
+        }
+
+        for(int idx = 0; idx < newList.Count; idx++){
+            Player currPlayer = newList[idx].GetComponent<Player>().GetComponent<Player>();
+            Debug.Log(currPlayer.taskDone);
         }
 
     }
