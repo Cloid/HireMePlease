@@ -31,10 +31,8 @@ public class CoffeeTaskScript : MonoBehaviour
         }
 
         yield return new WaitForSeconds(3f);
-
         //THIS IS WHERE WE GIVE POINTS
         Debug.Log(gameObject.GetComponent<GetPlayer>().player);
-        
         gameObject.SetActive(false);
     }
 }
