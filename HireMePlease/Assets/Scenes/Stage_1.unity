@@ -640,10 +640,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1280, y: 720}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -6487,7 +6487,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 3
+  m_Text: 
 --- !u!222 &341103481
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6667,7 +6667,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 1st
+  m_Text: 
 --- !u!222 &377984819
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7332,8 +7332,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -19.8}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 0, y: -71.2}
+  m_SizeDelta: {x: 300, y: 104.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &473882847
 MonoBehaviour:
@@ -7368,8 +7368,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Drop what you''re doing and attend the meeting within the time limit or
-    lose a star!
+  m_Text: 'Drop what you''re doing and attend the meeting within the time limit.
 
 '
 --- !u!222 &473882848
@@ -8674,7 +8673,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Josue
+  m_Text: 
 --- !u!222 &710553553
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9530,7 +9529,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -50}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 300, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &829686972
 MonoBehaviour:
@@ -9644,7 +9643,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 2nd
+  m_Text: 
 --- !u!222 &831511377
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9728,7 +9727,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 8
+  m_Text: 
 --- !u!222 &834081892
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11113,7 +11112,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 5
+  m_Text: 
 --- !u!222 &1039009930
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11192,7 +11191,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Kaylin
+  m_Text: 
 --- !u!222 &1042948282
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -28771,7 +28770,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 4th
+  m_Text: 
 --- !u!222 &1341531145
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -29141,7 +29140,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 2x Speed
+  m_Text: 
 --- !u!222 &1391178113
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -30705,7 +30704,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -100, y: -45}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 400, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1574473120
 MonoBehaviour:
@@ -31009,7 +31008,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 3rd
+  m_Text: 
 --- !u!222 &1618288871
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -31151,7 +31150,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Cloid
+  m_Text: 
 --- !u!222 &1650093673
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -31494,7 +31493,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 133.6}
+  m_AnchoredPosition: {x: 210.9, y: 276.5}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1780433456
@@ -32855,7 +32854,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Modesto
+  m_Text: 
 --- !u!222 &1904650284
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -33024,7 +33023,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Crown
+  m_Text: 
 --- !u!222 &2002684047
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -33209,7 +33208,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 12
+  m_Text: 
 --- !u!222 &2089566077
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -33263,7 +33262,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -100, y: -20}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 400, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2099321663
 MonoBehaviour:
