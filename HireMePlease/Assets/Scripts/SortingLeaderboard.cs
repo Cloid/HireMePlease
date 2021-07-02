@@ -2,14 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-
+using UnityEngine.UI;
+using Photon.Pun;
 public class SortingLeaderboard : MonoBehaviour
 {
-    //References to leaderboard rankings
-    [SerializeField] private GameObject rank1;
-    [SerializeField] private GameObject rank2;
-    [SerializeField] private GameObject rank3;
-    [SerializeField] private GameObject rank4;
+    //References to leaderboard rankings  
+    [SerializeField] private Text rank1;
+    [SerializeField] private Text rank2;
+    [SerializeField] private Text rank3;
+    [SerializeField] private Text rank4;
+    [SerializeField] private Text score1;
+    [SerializeField] private Text score2;
+    [SerializeField] private Text score3;
+    [SerializeField] private Text score4;
 
     private GameObject[] goList;
 
@@ -36,9 +41,30 @@ public class SortingLeaderboard : MonoBehaviour
 
         for(int idx = 0; idx < newList.Count; idx++){
             Player currPlayer = newList[idx].GetComponent<Player>().GetComponent<Player>();
+            if(idx == 0){
+                rank1.text = currPlayer.gameObject.GetPhotonView().Owner.NickName;
+                score1.text = currPlayer.taskDone.ToString();
+            } else if (idx == 1){
+                rank2.text = currPlayer.gameObject.GetPhotonView().Owner.NickName;
+                score2.text = currPlayer.taskDone.ToString();
+
+            } else if (idx == 2){
+                rank3.text = currPlayer.gameObject.GetPhotonView().Owner.NickName;
+                score3.text = currPlayer.taskDone.ToString();
+  
+            } else if (idx == 3){
+                rank4.text = currPlayer.gameObject.GetPhotonView().Owner.NickName;
+                score4.text = currPlayer.taskDone.ToString();
+            }
+            //currPlayer.taskDone
             Debug.Log(currPlayer.taskDone);
         }
+        
 
+    }
+
+    public void LeaveRoom(){
+        PhotonNetwork.LeaveRoom();
     }
 
     // Update is called once per frame

@@ -12211,9 +12211,33 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1159476763}
-        m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
-        m_MethodName: load
+      - m_Target: {fileID: 1449869023}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1449869028}
+        m_TargetAssemblyTypeName: SortingLeaderboard, Assembly-CSharp
+        m_MethodName: LeaveRoom
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: Play
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -29550,10 +29574,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a1bcadd9696ed243ac07ad80e92b72f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rank1: {fileID: 778292247}
-  rank2: {fileID: 1876583007}
-  rank3: {fileID: 1376668028}
-  rank4: {fileID: 126693277}
+  rank1: {fileID: 1650093672}
+  rank2: {fileID: 1042948281}
+  rank3: {fileID: 710553552}
+  rank4: {fileID: 1904650283}
+  score1: {fileID: 2089566076}
+  score2: {fileID: 834081891}
+  score3: {fileID: 1039009929}
+  score4: {fileID: 341103480}
 --- !u!1001 &1455404792
 PrefabInstance:
   m_ObjectHideFlags: 0

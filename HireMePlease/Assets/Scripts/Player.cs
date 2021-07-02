@@ -198,7 +198,6 @@ public class Player : MonoBehaviour
 
     private void newNumber()
     {
-        
 
         taskID = Random.Range(0, 5);
         //Debug.Log("Current taskID: " + taskID);
