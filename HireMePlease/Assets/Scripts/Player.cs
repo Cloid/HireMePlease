@@ -8,6 +8,7 @@ using Photon.Pun;
 
 public class Player : MonoBehaviour
 {
+    Rigidbody rb;
     //Player Speed Movement
     public float speed = 10.0f;
 
@@ -26,7 +27,7 @@ public class Player : MonoBehaviour
     //[Range(1.0f, 10.0f)] // dash dist
     public float dashForce = 1000.0f;
     public float dashCooldown = 2.2f;
-    private float nextDashAvailable = 0.0f; 
+    private float nextDashAvailable = 0.0f;
 
     public PhotonView photonView;
 
@@ -42,6 +43,7 @@ public class Player : MonoBehaviour
     public int taskDone = 0;
     public int bonusPt = 0;
     public bool callOnce = false;
+    private bool callTaskOnce = false;
     private KeyCode[] keycodes = new KeyCode[]
     {
         KeyCode.W, KeyCode.A,
@@ -51,8 +53,9 @@ public class Player : MonoBehaviour
         KeyCode.DownArrow, KeyCode.RightArrow
     };
 
-    private void Awake() {
-        generateThreeTasks();    
+    private void Awake()
+    {
+        generateThreeTasks();
         TaskList[taskDone].changeTaskUI();
     }
 
@@ -67,10 +70,19 @@ public class Player : MonoBehaviour
         forward = Vector3.Normalize(forward);
         right = Quaternion.Euler(new Vector3(0, 90, 0)) * forward;
         photonView = GetComponent<PhotonView>();
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
+    {
+        if (photonView.IsMine)
+        {
+            //dash handler
+            DashHandler();
+        }
+    }
+    void FixedUpdate()
     {
         // //Get current value of Slider
         // barValue = ProgressBar_GO.GetComponent<Slider>().value;
@@ -96,11 +108,8 @@ public class Player : MonoBehaviour
                 Move();
                 //Debug.Log(keycodes.Any(code => Input.GetKey(code)));
             }
-            //dash handler
-            DashHandler();
         }
     }
-
     private void Move()
     {
         //Vector intilization for movements and edge cases for flipping/normalizing
@@ -109,8 +118,15 @@ public class Player : MonoBehaviour
         Vector3 upMovement = forward * speed * Time.deltaTime * Input.GetAxis("Vertical");
         Vector3 heading = Vector3.Normalize(rightMovement + upMovement);
         transform.forward = heading;
-        transform.position += rightMovement;
-        transform.position += upMovement;
+
+
+        //rb.MovePosition(transform.position + rightMovement);
+        //rb.MovePosition(transform.position + upMovement);
+        if (canMove(heading, 0.7f))
+        {
+            transform.position += rightMovement;
+            transform.position += upMovement;
+        }
 
         lastDir = direction;
         lastHeading = heading;
@@ -142,9 +158,12 @@ public class Player : MonoBehaviour
     // }
 
     // do the dash (maybe)
-    private void DashHandler(){
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            if (Time.time >nextDashAvailable) {
+    private void DashHandler()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (Time.time > nextDashAvailable)
+            {
                 bonk(lastHeading, dashForce);
                 nextDashAvailable = Time.time + dashCooldown;
             }
@@ -153,25 +172,49 @@ public class Player : MonoBehaviour
     }
 
     //slap the player in a direction like its missbehaving
-    private void bonk (Vector3 heading, float force) {
-        Debug.Log("heading "+heading+ "\ncalculated force "+(heading*force));
+    private void bonk(Vector3 heading, float force)
+    {
+        Debug.Log("heading " + heading + "\ncalculated force " + (heading * force));
         this.GetComponent<Rigidbody>().AddForce(heading * force);
+    }
+
+    //was canDash
+    //make sure we dont move through solid things
+    private bool canMove(Vector3 dir, float dist)
+    {
+        RaycastHit hit;
+        Ray ray = new Ray(transform.position, dir);
+        if (Physics.Raycast(ray, out hit, dist))
+        {
+            if (hit.collider.tag == "map")
+            {
+                return false;
+            }
+        }
+        //Debug.Log(Physics2D.Raycast(transform.position, dir, dist));
+        //return Physics.Raycast(transform.position, dir, dist) == null;
+        return true;
     }
 
     private void newNumber()
     {
-        taskID = Random.Range(0, 3);
+        
+
+        taskID = Random.Range(0, 5);
         //Debug.Log("Current taskID: " + taskID);
         if (!randomInts.Contains(taskID))
         {
             //Debug.Log("Added to list: " + taskID);
             randomInts.Add(taskID);
-        } else if(randomInts.Count != taskCount) {
+        }
+        else if (randomInts.Count != taskCount)
+        {
             newNumber();
         }
     }
-    
-    public void generateThreeTasks(){
+
+    public void generateThreeTasks()
+    {
         for (int idx = 0; idx < taskCount; idx++)
         {
             //Generate a new unique int
@@ -180,46 +223,91 @@ public class Player : MonoBehaviour
             TaskList.Add(new Task());
             //Look into current index and change Task's type based on taskID
             TaskList[idx].changeTaskType(taskID);
+
+            if (taskID == 2)
+            {
+                callTaskOnce = true;
+            }
             //Debug.Log("TaskList: " + idx + " has taskID of " + taskID);
         }
         randomInts.Clear();
         Debug.Log("Count: " + TaskList.Count());
     }
 
-    private void resetList(){
+    public void generateNewThreeTasks()
+    {
+        int test = TaskList.Count;
+        //if(TaskList.Contains(TaskList))
+        for (int idx = test; idx < (test + taskCount); idx++)
+        {
+            //Generate a new unique int
+            newNumber();
+            //Add new Task script to TaskList
+            TaskList.Add(new Task());
+            //Look into current index and change Task's type based on taskID
+            TaskList[idx].changeTaskType(taskID);
+            if (taskID == 2)
+            {
+                callTaskOnce = true;
+            }
+            //Debug.Log("TaskList: " + idx + " has taskID of " + taskID);
+        }
+        randomInts.Clear();
+        Debug.Log("Count: " + TaskList.Count());
+    }
+
+    private void resetList()
+    {
         /*if(!timerdone){
             randomInts.Clear();
         }*/
     }
 
-    public void taskComplete(){
+    public void taskComplete()
+    {
         Debug.Log("Task Done: " + taskDone);
         TaskList[taskDone].Complete();
         taskDone++;
+        Debug.Log("Checking: " + taskDone);
+
+        if (taskDone % 3 == 0)
+        {
+            Debug.Log("Help");
+            generateNewThreeTasks();
+        }
+
+        Debug.Log("Checking2: " + taskDone);
+
         TaskList[taskDone].changeTaskUI();
     }
 
-    public void bonusAdd(){
-        if(!callOnce){
+    public void bonusAdd()
+    {
+        if (!callOnce)
+        {
             callOnce = true;
             bonusPt++;
         }
     }
 
-    public void bonusDc(){
-        if(callOnce){
+    public void bonusDc()
+    {
+        if (callOnce)
+        {
             callOnce = false;
             bonusPt--;
         }
     }
 
-    public void addPts(){
+    public void addPts()
+    {
         taskDone += bonusPt;
         bonusPt = 0;
     }
 
     [PunRPC]
-    public void SyncValues(int total, int bonus){
+    public void SyncValues(int total, int bonus)
+    {
         taskDone = total;
         bonusPt = bonus;
     }

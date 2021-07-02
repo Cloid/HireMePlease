@@ -19,17 +19,10 @@ public class PresentationTaskLogic : MonoBehaviour
         }
         Debug.Log("PRESENTATION TASK COMPLETE");
 
-        if (GetComponent<GetPlayer>().player.GetComponent<Player>() != null)
-        {
-            Player currPlayer = GetComponent<GetPlayer>().player.GetComponent<Player>();
-            currPlayer.taskComplete();
-
-            if (currPlayer.taskDone % 3 == 0)
-            {
-                currPlayer.generateThreeTasks();
-            }
-        }
-
+        
+        Player currPlayer = GetComponent<GetPlayer>().player.GetComponent<Player>();
+        currPlayer.taskComplete();
+    
         yield return new WaitForSeconds(3f);
         gameObject.SetActive(false);
     }

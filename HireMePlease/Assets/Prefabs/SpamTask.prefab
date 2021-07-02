@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5919165945271094339}
   - component: {fileID: 5919165945271094338}
   - component: {fileID: 5919165945271094336}
+  - component: {fileID: 1506409864}
   m_Layer: 5
   m_Name: SpamTask
   m_TagString: Untagged
@@ -90,3 +91,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PopUp: {fileID: 7501583714926009708, guid: 5a5b45e524371214c93a05a0a5feb809, type: 3}
   tasks: 0
+--- !u!114 &1506409864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5919165945271094340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 524e17deac39e0b4eafc86f356739cf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}

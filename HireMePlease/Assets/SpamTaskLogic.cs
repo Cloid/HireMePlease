@@ -30,6 +30,8 @@ public class SpamTaskLogic : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
         }
         Debug.Log("POP UP TASK COMPLETE");
+        Player currPlayer = GetComponent<GetPlayer>().player.GetComponent<Player>();
+        currPlayer.taskComplete();
         yield return new WaitForSeconds(3f);
         gameObject.SetActive(false);
     }
