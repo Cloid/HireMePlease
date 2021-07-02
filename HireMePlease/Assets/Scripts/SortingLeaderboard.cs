@@ -19,14 +19,16 @@ public class SortingLeaderboard : MonoBehaviour
         goList = GameObject.FindGameObjectsWithTag("Player");
         //Add Bonus Points
         for(int idx = 0; idx < goList.Length;idx++){
-            goList[idx].GetComponent<Player>().addPts();
+            Player currPlayer = goList[idx].GetComponent<Player>().GetComponent<Player>();
+            currPlayer.addPts();
+            currPlayer.photonView.RPC("SyncValue", Photon.Pun.RpcTarget.AllBuffered, currPlayer.taskDone, currPlayer.bonusPt);
         }
 
         var newList = goList.OrderBy(e => e.GetComponent<Player>().taskDone).ToList();
         
         foreach(GameObject go in newList){
            int idx = go.GetComponent<Player>().taskDone;
-           Debug.Log("idx");
+           Debug.Log(idx);
         }
 
     }

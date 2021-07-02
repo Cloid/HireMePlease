@@ -217,4 +217,10 @@ public class Player : MonoBehaviour
         taskDone += bonusPt;
         bonusPt = 0;
     }
+
+    [PunRPC]
+    public void SyncValues(int total, int bonus){
+        taskDone = total;
+        bonusPt = bonus;
+    }
 }
