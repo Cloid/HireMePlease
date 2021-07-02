@@ -8,6 +8,7 @@ using Photon.Pun;
 
 public class Player : MonoBehaviour
 {
+    Rigidbody rb;
     //Player Speed Movement
     public float speed = 10.0f;
 
@@ -67,10 +68,18 @@ public class Player : MonoBehaviour
         forward = Vector3.Normalize(forward);
         right = Quaternion.Euler(new Vector3(0, 90, 0)) * forward;
         photonView = GetComponent<PhotonView>();
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
-    void Update()
+    void Update() {
+        if (photonView.IsMine)
+        {
+            //dash handler
+            DashHandler();
+        }
+    }
+    void FixedUpdate()
     {
         // //Get current value of Slider
         // barValue = ProgressBar_GO.GetComponent<Slider>().value;
@@ -96,11 +105,8 @@ public class Player : MonoBehaviour
                 Move();
                 //Debug.Log(keycodes.Any(code => Input.GetKey(code)));
             }
-            //dash handler
-            DashHandler();
         }
     }
-
     private void Move()
     {
         //Vector intilization for movements and edge cases for flipping/normalizing
@@ -109,9 +115,15 @@ public class Player : MonoBehaviour
         Vector3 upMovement = forward * speed * Time.deltaTime * Input.GetAxis("Vertical");
         Vector3 heading = Vector3.Normalize(rightMovement + upMovement);
         transform.forward = heading;
-        transform.position += rightMovement;
-        transform.position += upMovement;
+        
 
+        //rb.MovePosition(transform.position + rightMovement);
+        //rb.MovePosition(transform.position + upMovement);
+        if (canMove(heading, 0.7f)) {
+            transform.position += rightMovement;
+            transform.position += upMovement;
+        }
+        
         lastDir = direction;
         lastHeading = heading;
     }
@@ -156,6 +168,21 @@ public class Player : MonoBehaviour
     private void bonk (Vector3 heading, float force) {
         Debug.Log("heading "+heading+ "\ncalculated force "+(heading*force));
         this.GetComponent<Rigidbody>().AddForce(heading * force);
+    }
+    
+    //was canDash
+    //make sure we dont move through solid things
+    private bool canMove(Vector3 dir, float dist) {
+        RaycastHit hit;
+        Ray ray = new Ray(transform.position, dir);
+        if (Physics.Raycast(ray, out hit, dist)) {
+            if (hit.collider.tag == "map") {
+                return false;
+            }
+        }
+        //Debug.Log(Physics2D.Raycast(transform.position, dir, dist));
+        //return Physics.Raycast(transform.position, dir, dist) == null;
+        return true;
     }
 
     private void newNumber()
