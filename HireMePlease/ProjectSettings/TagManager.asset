@@ -8,6 +8,8 @@ TagManager:
   - map
   - Trash
   - Canvas
+  - Paper
+  - Shredder
   layers:
   - Default
   - TransparentFX
