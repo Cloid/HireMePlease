@@ -186,6 +186,22 @@ public class Player : MonoBehaviour
         Debug.Log("Count: " + TaskList.Count());
     }
 
+    public void generateNewThreeTasks(){
+        int test = TaskList.Count;
+        for (int idx = test; idx < (test + taskCount); idx++)
+        {
+            //Generate a new unique int
+            newNumber();
+            //Add new Task script to TaskList
+            TaskList.Add(new Task());
+            //Look into current index and change Task's type based on taskID
+            TaskList[idx].changeTaskType(taskID);
+            //Debug.Log("TaskList: " + idx + " has taskID of " + taskID);
+        }
+        randomInts.Clear();
+        Debug.Log("Count: " + TaskList.Count());
+    }
+
     private void resetList(){
         /*if(!timerdone){
             randomInts.Clear();
@@ -196,6 +212,15 @@ public class Player : MonoBehaviour
         Debug.Log("Task Done: " + taskDone);
         TaskList[taskDone].Complete();
         taskDone++;
+                Debug.Log("Checking: " + taskDone);
+
+        if( taskDone % 3 == 0){
+            Debug.Log("Help");
+            generateNewThreeTasks();
+        }
+
+        Debug.Log("Checking2: " + taskDone);
+
         TaskList[taskDone].changeTaskUI();
     }
 
