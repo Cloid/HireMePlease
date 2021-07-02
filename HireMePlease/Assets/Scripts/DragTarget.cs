@@ -67,4 +67,8 @@ public class DragTarget : MonoBehaviour
 				Debug.DrawLine (m_TargetJoint.transform.TransformPoint (m_TargetJoint.anchor), worldPos, m_Color);
 		}
 	}
+	public void forceStopDrag() {
+		Destroy(m_TargetJoint);
+		m_TargetJoint = null;
+	}
 }
