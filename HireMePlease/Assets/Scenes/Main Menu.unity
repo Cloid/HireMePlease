@@ -4119,7 +4119,7 @@ MonoBehaviour:
   Lobby: {fileID: 232467524}
   LobbyReady: {fileID: 445507875}
   playerCount: {fileID: 227933958}
-  p1holder: {fileID: 0}
+  p1holder: {fileID: 2064800531}
   p2holder: {fileID: 473686155}
   p3holder: {fileID: 1246062517}
   p4holder: {fileID: 1116725326}
@@ -7012,7 +7012,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4939818981994912490, guid: da4887c424a0aa44f92a459f91edea20, type: 3}
   m_PrefabInstance: {fileID: 689134742}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 2064800531}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
@@ -20482,6 +20482,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2059910586}
   m_CullTransparentMesh: 1
+--- !u!1 &2064800531 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8409207287700229847, guid: da4887c424a0aa44f92a459f91edea20, type: 3}
+  m_PrefabInstance: {fileID: 689134742}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2065831530
 GameObject:
   m_ObjectHideFlags: 0
