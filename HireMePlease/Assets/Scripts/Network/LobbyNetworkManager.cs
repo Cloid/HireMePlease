@@ -23,6 +23,20 @@ public class LobbyNetworkManager : MonoBehaviourPunCallbacks
     [SerializeField] private GameObject LobbyReady;
     
     [SerializeField ]private GameObject playerCount;
+    [SerializeField]private GameObject p1holder;
+    [SerializeField]private GameObject p2holder;
+    [SerializeField]private GameObject p3holder;
+    [SerializeField]private GameObject p4holder;
+    [SerializeField]private Text Tp1holder;
+    [SerializeField]private Text Tp2holder;
+    [SerializeField]private Text Tp3holder;
+    [SerializeField]private Text Tp4holder;
+
+    public Text holder;
+
+    public PhotonView photonView;
+    public GameObject playerName;
+
 
     private List<RoomItemUI> _playerList = new List<RoomItemUI>();
 
@@ -31,11 +45,15 @@ public class LobbyNetworkManager : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
+        if(photonView==null){
+            GetComponent<PhotonView>();
+        }
         if(playerCount==null){
             playerCount = GameObject.Find("DontDestroy");
         }
         Initialize();
         Connect();
+        
     }
 
     #region PhotonCallbacks
@@ -88,6 +106,7 @@ public class LobbyNetworkManager : MonoBehaviourPunCallbacks
 
         Debug.Log("Current Players: "+ PhotonNetwork.CurrentRoom.PlayerCount);
         playerCount.GetComponent<NeverDestroy>().playerIndex = PhotonNetwork.CurrentRoom.PlayerCount;
+        NeverDestroy index = playerCount.GetComponent<NeverDestroy>();
 
         if (PhotonNetwork.IsMasterClient)
         {
@@ -98,6 +117,43 @@ public class LobbyNetworkManager : MonoBehaviourPunCallbacks
             Lobby.SetActive(false);
             LobbyReady.SetActive(true);
         }
+        
+        if (index.playerIndex == 1)
+            {
+                playerName = PhotonNetwork.Instantiate("P1 Name",
+                    p1holder.transform.position,
+                        Quaternion.identity);
+                        holder = Tp1holder;
+            }
+            else if (index.playerIndex == 2)
+            {
+                Debug.Log("test");
+                playerName = PhotonNetwork.Instantiate("P2 Name",
+                               p2holder.transform.position,
+                                   Quaternion.identity);
+                    holder = Tp2holder;
+
+            }
+            else if (index.playerIndex == 3)
+            {
+               playerName = PhotonNetwork.Instantiate("P3 Name",
+               p3holder.transform.position,
+                   Quaternion.identity);
+                    holder = Tp3holder;
+
+            }
+            else if (index.playerIndex == 4)
+            {
+               playerName = PhotonNetwork.Instantiate("P4 Name",
+               p4holder.transform.position,
+                   Quaternion.identity);
+                holder = Tp4holder;
+
+            }
+            string help = playerName.GetPhotonView().Owner.NickName;
+            Debug.Log(help);
+            photonView.RPC("syncName",RpcTarget.AllBuffered, help, index.playerIndex);
+
         UpdatePlayerList();
     }
 
@@ -205,5 +261,21 @@ public class LobbyNetworkManager : MonoBehaviourPunCallbacks
     public void OnStartGamePressed()
     {
         PhotonNetwork.LoadLevel("Stage_1");
+    }
+
+    [PunRPC]
+    public void syncName(string playername, int index){
+        Debug.Log("name: "+ playername);
+        if(index == 1){
+            Tp1holder.text = playername;
+        } else if( index == 2){
+            Tp2holder.text = playername;
+        } else if (index ==3 ){
+            Tp3holder.text = playername;
+        } else if (index == 4){
+            Tp4holder.text = playername;
+        }
+        //nameObject.text = playername;
+        //for(int idx = 0; )
     }
 }
