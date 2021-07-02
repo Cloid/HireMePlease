@@ -200,6 +200,9 @@ public class Player : MonoBehaviour
     {
 
         taskID = Random.Range(0, 5);
+        if(taskID == 2 && callTaskOnce){
+            newNumber();
+        }
         //Debug.Log("Current taskID: " + taskID);
         if (!randomInts.Contains(taskID))
         {
