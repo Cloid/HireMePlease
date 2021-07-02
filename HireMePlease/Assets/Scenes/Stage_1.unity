@@ -9854,8 +9854,6 @@ MonoBehaviour:
   sceneViewId: 7
   InstantiationId: 0
   isRuntimeInstantiated: 0
-<<<<<<< Updated upstream
-=======
 --- !u!1001 &1218193119
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9982,7 +9980,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d951cf1aa699ce45a5296b5744c7ecc, type: 3}
->>>>>>> Stashed changes
 --- !u!1 &1253594438
 GameObject:
   m_ObjectHideFlags: 0
